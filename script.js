@@ -14,10 +14,28 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 //scores
-const scores = [0, 0];
-let currentScore = 0;
-let currentPlayer = 0;
-let playing = true;
+let scores, currentScore, currentPlayer, playing;
+
+function init() {
+  // allows you to play
+  playing = true;
+  // setting variables
+  scores = [0, 0]
+  currentScore = 0;
+  currentPlayer = 0;
+  // sets scores to 0 current/total
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  scores[currentPlayer] = 0;
+  scores[!currentPlayer] = 0;
+  //resets styling
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+}
+init();
 
 function switchPlayer() {
       // swtich to next player, reset score to 0
@@ -72,23 +90,4 @@ btnHold.addEventListener('click', function() {
 });
 
 // new game
-btnNew.addEventListener('click', function() {
-  //resets styling
-  document.querySelector(`.player--${currentPlayer}`).classList.remove('player--winner');
-  document.querySelector(`.player--${currentPlayer}`).classList.remove('player--active');
-  diceEl.classList.add('hidden');
-  // resets current score
-  document.getElementById(`current--${currentPlayer}`).textContent = 0;
-  currentScore = 0;
-  // back to player 0
-  currentPlayer = 0;
-  // puts stying back to player 1
-  document.querySelector(`.player--${currentPlayer}`).classList.add('player--active');
-  // sets scores back to 0 current/total
-  document.getElementById(`score--0`).textContent = 0;
-  document.getElementById(`score--1`).textContent = 0;
-  scores[currentPlayer] = 0;
-  scores[!currentPlayer] = 0;
-  // allows you to play again
-  playing = true;
-})
+btnNew.addEventListener('click', init);
