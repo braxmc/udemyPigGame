@@ -23,11 +23,13 @@ function init() {
   scores = [0, 0]
   currentScore = 0;
   currentPlayer = 0;
-  // sets scores to 0 current/total
+  // sets scores to 0 total
   score0El.textContent = 0;
   score1El.textContent = 0;
   scores[currentPlayer] = 0;
   scores[!currentPlayer] = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0
   //resets styling
   diceEl.classList.add('hidden');
   player0El.classList.remove('player--winner');
@@ -38,12 +40,12 @@ function init() {
 init();
 
 function switchPlayer() {
-      // swtich to next player, reset score to 0
-      document.getElementById(`current--${currentPlayer}`).textContent = 0;
-      currentScore = 0;
-      currentPlayer = currentPlayer === 0 ? 1 : 0;
-      player0El.classList.toggle('player--active');
-      player1El.classList.toggle('player--active');
+  // swtich to next player, reset score to 0
+  document.getElementById(`current--${currentPlayer}`).textContent = 0;
+  currentScore = 0;
+  currentPlayer = currentPlayer === 0 ? 1 : 0;
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
 }
 
 // starting conditions
@@ -77,7 +79,7 @@ btnHold.addEventListener('click', function() {
     scores[currentPlayer] += currentScore;
     document.getElementById(`score--${currentPlayer}`).textContent = scores[currentPlayer];
 
-    if(scores[currentPlayer] >= 10) {
+    if(scores[currentPlayer] >= 100) {
       // finishes game
       playing = false;
       diceEl.classList.add('hidden');
